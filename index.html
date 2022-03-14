@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Tip calculator app</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+  <div class="logo">
+    <img src="images/logo.svg" alt="logo" srcset="">
+  </div>
+
+  <div class="calculator-container">
+    <form class="left-container">
+      <label for="bill">Bill</label>
+      <input type="number" class="bill" name="bill" id="bill" min="0" placeholder="0">
+      <div class="buttons">
+        <h4>Select Tip %</h4>
+          <button type="button" data-percent="5">5%</button>
+          <button type="button" data-percent="10">10%</button>
+          <button type="button" data-percent="15">15%</button>
+          <button type="button" data-percent="25">25%</button>
+          <button type="button" data-percent="50">50%</button>
+          <input type="number" class="custom-tip" name="custom-tip" id="custom-btn" min="0" placeholder="Custom"> 
+      </div>
+      <div class="people-count">
+        <h4>Number of People
+          <span class="error-msg">Can't be zero.</span>
+        </h4>   
+        <input type="number" name="count-people" id="count-people" min="0" placeholder="0">
+      </div>
+
+    </form> <!--Left Container.-->
+    <div class="right-container">
+      <div class="tip">
+        <div class="tip-countainer">
+          <h4>Tip Amount</h4>
+          <p>/ person</p>
+        </div>
+        <h2 class="tip-amount">$0.00</h2>
+      </div>
+
+      <div class="total">
+        <div class="total-container"> 
+          <h4>Total</h4>
+          <p>/ person</p>
+        </div>
+        <h2 class="total-person">$0.00</h2>
+      </div>
+
+      <button type="reset" class="reset" id="reset">RESET</button>
+    </div>
+
+  </div>
+
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/jahcoding" target="_blank">JahCoding</a>.
+  </div>
+
+
+  <script src="js/script.js"></script>
+</body>
+</html>
