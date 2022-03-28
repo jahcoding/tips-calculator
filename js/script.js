@@ -20,7 +20,6 @@ function getDynamicInformation(selector){
             case 'custom-btn':
                 customBtnValue = parseInt(input.value);
         }
-        
         costTotal(billValue, countPeopleValue, customBtnValue);
     }); 
     
@@ -30,36 +29,41 @@ function costTotal( bill, countPeople, customBtn ){
     if(bill && countPeople && customBtn){
         tipAmount.innerHTML = `$${((bill / countPeople) * (customBtn / 100)).toFixed(2)}`;
     }else{
-        btns.forEach((item, i) => {
-
-            item.addEventListener('click', (e)=>{ 
-                e.preventDefault();
-                percentage = +e.target.getAttribute('data-percent');
-                disActiveBtn();
-                activeBtn(i)
-                
-                console.log(percentage);
-                if(bill && countPeople){
-                    tipAmount.innerHTML = `$${((bill / countPeople) * (percentage / 100)).toFixed(2)}`;
-                }
-            });
-        });
+        calcAmountWithDefaultPercents(bill, countPeople);
     }
-    
-    
 }
+
+function calcAmountWithDefaultPercents(bill, countPeople){
+    btns.forEach((item, i) => {
+        item.addEventListener('click', (e)=>{ 
+            e.preventDefault();
+            disActiveBtn();
+            activeBtn(i);
+            checkDynamicInformation(bill, countPeople, item);
+        });
+        checkDynamicInformation(bill, countPeople, item);
+    });
+}
+
+function checkDynamicInformation(bill, countPeople, itemArray){
+    if(bill && countPeople && itemArray.classList.contains('active')){
+        percentage = +itemArray.getAttribute('data-percent');
+        tipAmount.innerHTML = `$${((bill / countPeople) * (percentage / 100)).toFixed(2)}`;
+    }
+}
+
 function disActiveBtn(){
     btns.forEach((item)=>{
         item.classList.remove('active');
     })
 }
 
-function activeBtn(i){
+function activeBtn(i = 0){
     btns[i].classList.add('active');
 }
 
-
-costTotal();
+disActiveBtn();
+activeBtn();
 getDynamicInformation('#bill');
 getDynamicInformation('#count-people');
 getDynamicInformation('#custom-btn');
