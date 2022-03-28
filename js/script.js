@@ -2,7 +2,8 @@ let bill = document.querySelector('#bill'),
     customBtn = document.querySelector('#custom-btn'),
     countPeople = document.querySelector('#count-people'),
     tipAmount = document.querySelector('.tip-amount'),
-    btns = document.querySelectorAll('.buttons button');
+    btns = document.querySelectorAll('.buttons button'),
+    total = document.querySelector('.total-person');
 
 let billValue, countPeopleValue, customBtnValue, percentage;
 
@@ -18,6 +19,7 @@ function getDynamicInformation(selector){
                 countPeopleValue = parseInt(input.value);
                 break;
             case 'custom-btn':
+                disActiveBtn();
                 customBtnValue = parseInt(input.value);
         }
         costTotal(billValue, countPeopleValue, customBtnValue);
@@ -28,6 +30,7 @@ function getDynamicInformation(selector){
 function costTotal( bill, countPeople, customBtn ){
     if(bill && countPeople && customBtn){
         tipAmount.innerHTML = `$${((bill / countPeople) * (customBtn / 100)).toFixed(2)}`;
+        total.innerHTML = `$${((((bill * customBtn) / 100) + (bill)) / 5 ).toFixed(2)}`;
     }else{
         calcAmountWithDefaultPercents(bill, countPeople);
     }
@@ -49,6 +52,7 @@ function checkDynamicInformation(bill, countPeople, itemArray){
     if(bill && countPeople && itemArray.classList.contains('active')){
         percentage = +itemArray.getAttribute('data-percent');
         tipAmount.innerHTML = `$${((bill / countPeople) * (percentage / 100)).toFixed(2)}`;
+        total.innerHTML = `$${((((bill * percentage) / 100) + (bill)) / 5 ).toFixed(2)}`;
     }
 }
 
